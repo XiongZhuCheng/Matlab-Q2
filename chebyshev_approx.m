@@ -1,12 +1,13 @@
-function a = chebyshev_approx(f, N)
-% Computes coefficients a_n for Chebyshev polynomial approximation
-a = zeros(N+1, 1);
-for n = 0:N
-    integrand = @(x) f(x) .* chebyshev_poly(n, x) ./ sqrt(1 - x.^2);
-    if n == 0
-        a(n+1) = (1/pi) * simpson(integrand, -1 + 1e-10, 1 - 1e-10, 1000);
+function a = chebyshev_approx(f, n)
+% 计算 Chebyshev 多项式逼近的系数
+a = zeros(n+1, 1);
+w = @(x) 1 ./ sqrt(1 - x.^2);
+for k = 0:n
+    integrand = @(x) f(x) .* chebyshev_poly(k, x) .* w(x);
+    if k == 0
+        a(k+1) = (1/pi) * simpson(integrand, -1, 1, 100);
     else
-        a(n+1) = (2/pi) * simpson(integrand, -1 + 1e-10, 1 - 1e-10, 1000);
+        a(k+1) = (2/pi) * simpson(integrand, -1, 1, 100);
     end
 end
 end

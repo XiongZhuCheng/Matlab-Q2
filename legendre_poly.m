@@ -1,21 +1,13 @@
 function P = legendre_poly(n, x)
-% Computes the Legendre polynomial P_n(x) using recurrence relation
-P0 = ones(size(x));
+% 生成第 n 阶 Legendre 多项式在点 x 处的值
+P = zeros(n+1, length(x));
+P(1, :) = 1;
 if n == 0
-    P = P0;
     return;
 end
-P1 = x;
-if n == 1
-    P = P1;
-    return;
-end
-P_prev = P0;
-P_curr = P1;
+P(2, :) = x;
 for k = 2:n
-    P_next = ((2*k - 1).*x.*P_curr - (k - 1)*P_prev)/k;
-    P_prev = P_curr;
-    P_curr = P_next;
+    P(k+1, :) = ((2*k - 1) .* x .* P(k, :) - (k - 1) * P(k-1, :)) / k;
 end
-P = P_curr;
+P = P(end, :);
 end

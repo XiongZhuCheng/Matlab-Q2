@@ -1,21 +1,13 @@
 function T = chebyshev_poly(n, x)
-% Computes the Chebyshev polynomial T_n(x) using recurrence relation
-T0 = ones(size(x));
+% 生成第 n 阶 Chebyshev 多项式在点 x 处的值
+T = zeros(n+1, length(x));
+T(1, :) = 1;
 if n == 0
-    T = T0;
     return;
 end
-T1 = x;
-if n == 1
-    T = T1;
-    return;
-end
-T_prev = T0;
-T_curr = T1;
+T(2, :) = x;
 for k = 2:n
-    T_next = 2*x.*T_curr - T_prev;
-    T_prev = T_curr;
-    T_curr = T_next;
+    T(k+1, :) = 2 * x .* T(k, :) - T(k-1, :);
 end
-T = T_curr;
+T = T(end, :);
 end

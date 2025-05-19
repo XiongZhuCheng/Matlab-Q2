@@ -1,8 +1,8 @@
-function a = legendre_approx(f, N)
-% Computes coefficients a_n for Legendre polynomial approximation
-a = zeros(N+1, 1);
-for n = 0:N
-    integrand = @(x) f(x) .* legendre_poly(n, x);
-    a(n+1) = (2*n + 1)/2 * simpson(integrand, -1, 1, 1000);
+function c = legendre_approx(f, n)
+% 计算 Legendre 多项式逼近的系数
+c = zeros(n+1, 1);
+for k = 0:n
+    integrand = @(x) f(x) .* legendre_poly(k, x);
+    c(k+1) = (2*k + 1)/2 * simpson(integrand, -1, 1, 100);
 end
 end
