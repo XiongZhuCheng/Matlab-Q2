@@ -1,5 +1,5 @@
 function T = chebyshev_poly(n, x)
-% 生成第 n 阶 Chebyshev 多项式在点 x 处的值
+% Evaluate the Chebyshev polynomial of degree n at points x
 T = zeros(n+1, length(x));
 T(1, :) = 1;
 if n == 0

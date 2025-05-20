@@ -1,5 +1,5 @@
 function P = legendre_poly(n, x)
-% 生成第 n 阶 Legendre 多项式在点 x 处的值
+% Evaluate the Legendre polynomial of degree n at points x
 P = zeros(n+1, length(x));
 P(1, :) = 1;
 if n == 0

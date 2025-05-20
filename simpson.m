@@ -1,7 +1,7 @@
 function I = simpson(f, a, b, n)
-% 使用复合 Simpson 规则计算积分
+% Composite Simpson rule for numerical integration
 if mod(n, 2) ~= 0
-    error('n 必须为偶数');
+    error('n must be even');
 end
 h = (b - a) / n;
 x = a:h:b;
